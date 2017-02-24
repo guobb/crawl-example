@@ -1,9 +1,27 @@
 var express = require('express');
+const async = require('async');
 var router = express.Router();
+const model = require('../model');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get('/', function (req, res, next) {
+
+    //  1.读取文章的列表和分类的列表
+
+    async.parallel([
+        function (cb) {
+            model.category(cb);
+        },
+        function (cb) {
+            model.article(cb);
+        }
+    ], function (err, result) {
+        console.log(result);
+
+    });
+    res.render('index', {
+        categories: result[0],
+        articles: result[1]
+    });
 });
 
 module.exports = router;

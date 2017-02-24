@@ -1,0 +1,20 @@
+{
+  "name": "crawl-example",
+  "description": "",
+  "main": "",
+  "authors": [
+    "guobb <18576469764@163.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/guobb/crawl-example",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}

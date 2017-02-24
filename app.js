@@ -1,3 +1,13 @@
+/**
+ * 1. 分页
+ * 2. 可以查询
+ * 3. 点击分类可以切换文章
+ * 4. 点击文章显示详情
+ *
+ *
+ *
+ */
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -44,3 +54,19 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+
+const spawn = require('child_process').spawn;
+const cronJob = require('cron').CronJob;
+
+let job = new cronJob('*/30 * * * * *',function () {
+
+  // 创建一个子进程
+   let child =  spawn(process.execPath, ['../task/main.js']);
+   // 把子进程的标准输出的数据传递到主进程的标准输出
+    child.stdout.pipe(process.stdout);
+   // 把子进程的错误输出的数据传递到主进程的标准输出
+    child.stderr.pipe(process.stderr);
+});
+
+job.start();
